@@ -1,0 +1,66 @@
+---
+# tasks file for python-services
+- name: Extract latest download URL from Github API reponse.
+  ansible.builtin.set_fact:
+    PYTHON_PROJECT_WD: "{{ PYTHON_PROJECT_REPOSITORY_PATH }}/virtual-assistant-listener-py"
+
+- name: Ensure Python and Pip are installed
+  become: true
+  ansible.builtin.apt:
+    name:
+      - python3
+      - python3-pip
+    state: present
+    update_cache: true
+
+- name: Ensure Python project deps are installed
+  become: true
+  ansible.builtin.apt:
+    name:
+      - libportaudio2
+      - libatomic1
+      - espeak
+      - alsa-utils
+    state: present
+    update_cache: true
+
+- name: Install Poetry for the user
+  ansible.builtin.pip:
+    name: poetry
+    state: present
+
+- name: Clone private repository using HTTPS and PAT # noqa: latest
+  ansible.builtin.git:
+    repo: 'https://x-access-token:{{ PYTHON_PROJECT_GITHUB_TOKEN }}@github.com/stkr22/virtual-assistant-listener-py.git'
+    dest: {{ PYTHON_PROJECT_REPOSITORY_PATH }}
+    update: true
+    force: true
+
+- name: Install project dependencies using Poetry
+  ansible.builtin.shell:
+    cmd: poetry install
+    chdir: {{ PYTHON_PROJECT_WD }}
+  environment:
+    POETRY_VIRTUALENVS_IN_PROJECT: 'true'
+
+
+- name: Create virtual listener service.
+  ansible.builtin.template:
+    src: asoundrc.j2
+    dest: "{{ PYTHON_ASOUNDRC_TARGET_FOLDER }}/.asoundrc"
+    mode: "0644"
+
+
+- name: Create virtual listener service.
+  become: true
+  ansible.builtin.template:
+    src: virtual_assistant_listener_py.service.j2
+    dest: /etc/systemd/system/virtual_assistant_listener_py.service
+    owner: root
+    group: root
+    mode: "0644"
+  notify: Restart virtual assistant listener
+
+
+- name: Flush handlers for immediate systemd restart.
+  ansible.builtin.meta: flush_handlers

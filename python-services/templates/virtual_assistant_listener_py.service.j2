@@ -1,0 +1,13 @@
+[Unit]
+Description=Virtual Assistant Listener
+After=network.target
+
+[Service]
+Type=simple
+User=ubuntu
+WorkingDirectory={{ PYTHON_PROJECT_WD }}
+ExecStart={{ PYTHON_PROJECT_WD }}/.venv/bin/python {{ PYTHON_PROJECT_WD }}/src/main.py {{ PYTHON_SCRIPT_ARGS }}
+Restart=on-failure
+
+[Install]
+WantedBy=multi-user.target

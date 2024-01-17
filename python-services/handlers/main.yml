@@ -1,0 +1,10 @@
+---
+# handlers file for python-services
+
+- name: Restart virtual assistant listener
+  become: true
+  ansible.builtin.service:
+    state: restarted
+    enabled: true
+    daemon_reload: true
+    name: virtual_assistant_listener_py.service

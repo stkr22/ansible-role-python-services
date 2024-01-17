@@ -1,0 +1,22 @@
+{
+	"name": "Python 3",
+	"image": "mcr.microsoft.com/devcontainers/python:1-3.11",
+	"mounts": [
+		{
+			"source": "vscode-ansible-role-python-services",
+			"target": "/vscode/.vscode-server/extensions",
+			"type": "volume"
+		}
+	],
+	"customizations": {
+		"vscode": {
+			"extensions": [
+				"redhat.ansible",
+				"yzhang.markdown-all-in-one",
+				"DavidAnson.vscode-markdownlint",
+				"redhat.vscode-yaml"
+			]
+		}
+	},
+    "postCreateCommand": "pip3 install --user ansible ansible-lint"
+}
