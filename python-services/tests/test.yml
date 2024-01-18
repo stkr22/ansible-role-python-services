@@ -1,5 +1,12 @@
 ---
 - hosts: localhost
-  remote_user: root
+  connection: local
+  remote_user: vscode
+  vars_files:
+    - test_vars.yml
+  vars_prompt:
+    - name: "PYTHON_PROJECT_GITHUB_TOKEN"
+      prompt: "PYTHON_PROJECT_GITHUB_TOKEN?"
+      private: true
   roles:
     - python-services

@@ -5,8 +5,8 @@ After=network.target
 [Service]
 Type=simple
 User=ubuntu
-WorkingDirectory={{ PYTHON_PROJECT_WD }}
-ExecStart={{ PYTHON_PROJECT_WD }}/.venv/bin/python {{ PYTHON_PROJECT_WD }}/src/main.py {{ PYTHON_SCRIPT_ARGS }}
+WorkingDirectory={{ python_project_wd }}
+ExecStart={{ python_project_wd }}/.venv/bin/python {{ python_project_wd }}/src/main.py {{ python_project_script_args }}
 Restart=on-failure
 
 [Install]

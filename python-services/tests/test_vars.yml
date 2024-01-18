@@ -1,0 +1,3 @@
+- python_project_repository_path: /home/vscode/gits
+- python_asoundrc_target_folder: /home/vscode
+- python_project_script_args: -d 1
