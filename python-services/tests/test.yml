@@ -5,8 +5,8 @@
   vars_files:
     - test_vars.yml
   vars_prompt:
-    - name: "PYTHON_PROJECT_GITHUB_TOKEN"
-      prompt: "PYTHON_PROJECT_GITHUB_TOKEN?"
+    - name: "python_project_github_token"
+      prompt: "python_project_github_token?"
       private: true
   roles:
     - python-services

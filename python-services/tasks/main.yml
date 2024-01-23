@@ -1,6 +1,6 @@
 ---
 # tasks file for python-services
-- name: Extract latest download URL from Github API reponse.
+- name: Set facts.
   ansible.builtin.set_fact:
     python_project_wd: "{{ python_project_repository_path }}/virtual-assistant-listener-py"
 
@@ -10,7 +10,6 @@
     name:
       - python3
       - python3-pip
-      - python3-poetry
     state: present
     update_cache: true
 
@@ -33,7 +32,7 @@
 
 - name: Clone private repository using HTTPS and PAT # noqa: latest
   ansible.builtin.git:
-    repo: 'https://x-access-token:{{ PYTHON_PROJECT_GITHUB_TOKEN }}@github.com/stkr22/virtual-assistant-listener-py.git'
+    repo: 'https://x-access-token:{{ python_project_github_token }}@github.com/stkr22/virtual-assistant-listener-py.git'
     dest: "{{ python_project_wd }}"
     update: true
     force: true
@@ -45,13 +44,17 @@
   environment:
     POETRY_VIRTUALENVS_IN_PROJECT: 'true'
 
+- name: Generate .env file from template
+  ansible.builtin.template:
+    src: env_template.j2
+    dest: "{{ python_project_wd }}/.env"
+    mode: "0644"
 
 - name: Create virtual listener service.
   ansible.builtin.template:
     src: asoundrc.j2
     dest: "{{ python_asoundrc_target_folder }}/.asoundrc"
     mode: "0644"
-
 
 - name: Create virtual listener service.
   become: true
