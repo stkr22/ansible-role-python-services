@@ -1,6 +1,6 @@
 galaxy_info:
   author: 'stkr22'
-  role_name: 'ansible_role_python_services'
+  role_name: 'python_services'
   description: Use this role for different python services.
   company: your company (optional)
   license: 'GNU General Public License v3'
