@@ -51,7 +51,7 @@
     dest: "{{ python_project_wd }}/.env"
     mode: "0644"
 
-- name: Create virtual listener service.
+- name: Create asoundrc file.
   ansible.builtin.template:
     src: asoundrc.j2
     dest: "{{ python_asoundrc_target_folder }}/.asoundrc"
