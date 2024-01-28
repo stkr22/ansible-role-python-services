@@ -37,6 +37,7 @@
     dest: "{{ python_project_wd }}"
     update: true
     force: true
+  notify: Restart virtual assistant listener
 
 - name: Install project dependencies using Poetry
   ansible.builtin.shell:
