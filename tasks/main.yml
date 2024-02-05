@@ -23,11 +23,7 @@
 - name: Ensure Python project deps are installed
   become: true
   ansible.builtin.apt:
-    name:
-      - libportaudio2
-      - libatomic1
-      - espeak
-      - alsa-utils
+    name: "{{ python_project_apt_dependencies }}"
     state: present
     update_cache: true
 
@@ -50,12 +46,6 @@
   ansible.builtin.template:
     src: env_template.j2
     dest: "{{ python_project_wd }}/.env"
-    mode: "0644"
-
-- name: Create asoundrc file.
-  ansible.builtin.template:
-    src: asoundrc.j2
-    dest: "{{ python_asoundrc_target_folder }}/.asoundrc"
     mode: "0644"
 
 - name: Create virtual listener service.
