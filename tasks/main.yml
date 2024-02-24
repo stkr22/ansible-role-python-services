@@ -43,9 +43,9 @@
     POETRY_VIRTUALENVS_IN_PROJECT: 'true'
 
 - name: Generate .env file from template
-  ansible.builtin.template:
-    src: env_template.j2
-    dest: "{{ python_project_wd }}/.env"
+  ansible.builtin.copy:
+    dest: "{{ python_project_wd }}/config.yaml"
+    content: "{{ python_project_env_vars | to_nice_yaml }}"
     mode: "0644"
 
 - name: Create virtual listener service.

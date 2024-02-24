@@ -6,7 +6,7 @@ After=network.target
 Type=simple
 User=ubuntu
 WorkingDirectory={{ python_project_wd }}
-ExecStart={{ python_project_wd }}/.venv/bin/virtual-assistant-listener {{ python_project_script_args }}
+ExecStart={{ python_project_wd }}/.venv/bin/virtual-assistant-listener {{ python_project_wd }}/config.yaml {{ python_project_script_args }}
 Restart=on-failure
 
 [Install]
