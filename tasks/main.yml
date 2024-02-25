@@ -47,6 +47,7 @@
     dest: "{{ python_project_wd }}/config.yaml"
     content: "{{ python_project_env_vars | to_nice_yaml }}"
     mode: "0644"
+  notify: Restart virtual assistant listener
 
 - name: Create virtual listener service.
   become: true

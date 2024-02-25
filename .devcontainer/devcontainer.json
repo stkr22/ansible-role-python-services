@@ -7,7 +7,7 @@
 	"mounts": [
 		{
 			"source": "vscode-ansible-role-python-services",
-			"target": "/vscode/.vscode-server/extensions",
+			"target": "/home/vscode/.vscode-server/extensions",
 			"type": "volume"
 		}
 	],
