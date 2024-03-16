@@ -31,7 +31,7 @@
 - name: Execute install_dependencies.sh script
   ansible.builtin.command: "install_dependencies.sh >> install_dependencies.log"
   args:
-    chdir: "{{ python_project_repository_path }}/scripts"
+    chdir: "{{ python_project_wd }}/scripts"
     creates: install_dependencies.log
 
 - name: Install project dependencies using Poetry
