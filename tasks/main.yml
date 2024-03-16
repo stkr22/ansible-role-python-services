@@ -29,9 +29,12 @@
   notify: Restart virtual assistant listener
 
 - name: Ensure the script is executable
+  become: true
   ansible.builtin.file:
     path: "{{ python_project_wd }}/scripts/install_dependencies.sh"
-    mode: '0755'
+    mode: '0700'
+    owner: root
+    group: root
 
 - name: Execute install_dependencies.sh script
   become: true
