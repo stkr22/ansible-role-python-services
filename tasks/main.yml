@@ -38,7 +38,7 @@
 
 - name: Execute install_dependencies.sh script
   become: true
-  ansible.builtin.shell: install_dependencies.sh >> install_dependencies.log
+  ansible.builtin.shell: ./install_dependencies.sh >> install_dependencies.log
   args:
     chdir: "{{ python_project_wd }}/scripts"
     creates: install_dependencies.log
