@@ -28,8 +28,14 @@
     force: true
   notify: Restart virtual assistant listener
 
+- name: Ensure the script is executable
+  ansible.builtin.file:
+    path: "{{ python_project_wd }}/scripts/install_dependencies.sh"
+    mode: '0755'
+
 - name: Execute install_dependencies.sh script
-  ansible.builtin.command: "install_dependencies.sh >> install_dependencies.log"
+  become: true
+  ansible.builtin.shell: install_dependencies.sh >> install_dependencies.log
   args:
     chdir: "{{ python_project_wd }}/scripts"
     creates: install_dependencies.log
