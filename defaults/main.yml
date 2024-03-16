@@ -7,6 +7,3 @@ python_project_script_args: ""
 python_project_repository_path: "~/gits"
 python_project_github_token: ""
 python_asoundrc_target_folder: "~/"
-python_project_apt_dependencies:
-  - libportaudio2
-  - libatomic1
